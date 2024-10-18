@@ -1,0 +1,24 @@
+<head>
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List</h1>
+    <ul>
+        {% for task in tasks %}
+            <br>
+            <li>
+                {{ task.title }}
+                <p>Date de création: {{ task.created_at|date:"F d, Y H:i:s" }}</p>
+                {% if task.is_completed %}
+                    <p>Statut: Complété</p>
+                {% else %}
+                    <p>Statut: Non complété</p>
+                {% endif %}
+                <a href="{% url 'update_task' task.pk %}">Modifier</a>
+                <a href="{% url 'delete_task' task.pk %}">Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_task' %}">Créer une tâche</a>
+</body>
+</html>
